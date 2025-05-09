@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KAJIMA Manpower Management</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .form-row { margin-bottom: 10px; }
+        select, input { padding: 5px; margin-right: 10px; }
+        .job-entry { margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+    <h2>KAJIMA Manpower Management</h2>
+    <form id="manpowerForm">
+        <div class="form-row">
+            <label for="recordDate">Record Date:</label>
+            <input type="date" id="recordDate" name="recordDate" required>
+        </div>
+        <div class="form-row">
+            <label for="company">Company:</label>
+            <select id="company" name="company" required>
+                <option value="">-- Select Company --</option>
+                <option value="AAA Pte. Ltd.">AAA Pte. Ltd.</option>
+                <option value="BBB Pte. Ltd.">BBB Pte. Ltd.</option>
+                <option value="CCC Pte. Ltd.">CCC Pte. Ltd.</option>
+                <option value="DDD Pte. Ltd.">DDD Pte. Ltd.</option>
+                <option value="Other">Other</option>
+            </select>
+            <input type="text" id="companyOther" name="companyOther" placeholder="Enter company name" style="display:none;">
+        </div>
+        <div id="jobContainer">
+            <label>Job Titles and Headcount:</label><br>
+            <div class="job-entry">
+                <select name="job[]">
+                    <option value="">-- Select Job --</option>
+                    <option value="Project Director">Project Director</option>
+                    <option value="Project Advisor">Project Advisor</option>
+                    <option value="Site Manager">Site Manager</option>
+                    <option value="MEP Site Manager">MEP Site Manager</option>
+                    <option value="Sr. Civil Engineer">Sr. Civil Engineer</option>
+                    <option value="Sr. MEP Engineer">Sr. MEP Engineer</option>
+                    <option value="Civil Engineer">Civil Engineer</option>
+                    <option value="QS Engineer">QS Engineer</option>
+                    <option value="Others">Others</option>
+                </select>
+                <input type="number" name="count[]" min="0" placeholder="Number">
+            </div>
+        </div>
+        <button type="button" onclick="addJob()">+ Add another job</button><br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById('company').addEventListener('change', function () {
+            document.getElementById('companyOther').style.display = this.value === 'Other' ? 'inline-block' : 'none';
+        });
+
+        function addJob() {
+            const container = document.getElementById('jobContainer');
+            const entry = document.createElement('div');
+            entry.className = 'job-entry';
+            entry.innerHTML = \`
+                <select name="job[]">
+                    <option value="">-- Select Job --</option>
+                    <option value="Project Director">Project Director</option>
+                    <option value="Project Advisor">Project Advisor</option>
+                    <option value="Site Manager">Site Manager</option>
+                    <option value="MEP Site Manager">MEP Site Manager</option>
+                    <option value="Sr. Civil Engineer">Sr. Civil Engineer</option>
+                    <option value="Sr. MEP Engineer">Sr. MEP Engineer</option>
+                    <option value="Civil Engineer">Civil Engineer</option>
+                    <option value="QS Engineer">QS Engineer</option>
+                    <option value="Others">Others</option>
+                </select>
+                <input type="number" name="count[]" min="0" placeholder="Number">
+            \`;
+            container.appendChild(entry);
+        }
+
+        document.getElementById('manpowerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('This is a static form demo. Integration with Power Automate API will be added next.');
+        });
+    </script>
+</body>
+</html>
